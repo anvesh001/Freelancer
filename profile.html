@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block title %}Profile | {{ user }} {{ super }}{% endblock %}
+
+{% block body %}
+    <h1>Profile</h1>
+    <div class="grid-20">
+        <ul>
+            <li><a href="{% url 'accounts:edit_profile' %}">Edit Profile</a></li>
+            <li><a href="{% url 'accounts:change_password' %}">Change Password</a></li>
+        </ul>
+    </div>
+    <div class="grid-80">
+        {% if not profile.first_name %}
+            <p>You have an empty profile.</p>
+            <a href="{% url 'accounts:edit_profile' %}">Add some info</a>
+        {% else %}
+            <div class="grid-50">
+                <p><span class="underline">user_id</span>: {{ profile.user_id }}</p>
+                <p><span class="underline">First Name</span>: {{ profile.first_name }}</p>
+
+                <p><span class="underline">Email</span>: {{ profile.email }}</p>
+                <p><span class="underline">Qualification</span>: {{ profile.qualification }}</p>
+                  <p><span class="underline">keywords</span>: {{ profile.keywords }}</p>
+                  <p><span class="underline">Area Of Experince</span>: {{ profile.area_of_experince }}</p>
+                <p><span class="underline">State</span>: {{ profile.state }}</p>
+                <p><span class="underline">Country</span>: {{ profile.country }}</p>
+                <p><span class="underline">Experince</span>: {{ profile.experince }}</p>
+            </div>
+            <div class="grid-50">
+                <p><span class="underline">Last Name</span>: {{ profile.last_name }}</p>
+                <p><span class="underline">Birth Date</span>: {{ profile.birth_date }}</p>
+                <p><span class="underline">Price</span>: {{ profile.price }}</p>
+            <div class="grid-100">
+              Image:<img src="{{ profile.cover.url }}" class="img-responsive"/>
+            </div>
+
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
